@@ -7,15 +7,16 @@
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
 	stack_t *tmp;
+	int count = 0;
 
 	tmp = *head;
-	printf("pall\n");
-	
+
 	while(tmp != NULL)
 	{
+
 		printf("%d\n", tmp->n);
+		count++;
 		tmp = tmp->next;
-		
 	}
 }
 
@@ -29,15 +30,15 @@ void _push(stack_t **head, unsigned int pushnum)
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	new->n = pushnum;
+	new->n = pushnum;;
 	new->next = *head;
 	new->prev = NULL;
 	if (*head != NULL)
 	{
-		printf("here\n");
-		(*head)->prev = new; 
+		(*head)->prev = new;
 	}
-	(*head) = new;
+
+	*head = new;
 }
 
 void (*getopcode(char *s))(stack_t **, unsigned int)
@@ -83,7 +84,7 @@ void read_file(const char *file_name)
 	int tokennumber = 0;
 	void (*p)(stack_t **, unsigned int);
 
-
+	head = NULL;
 
 	if (file_name == NULL)
 	{
@@ -110,10 +111,9 @@ void read_file(const char *file_name)
 			tokennumber = atoi(token_1);
 		line_num++;
 		p = getopcode(token_0);
-			if (p == NULL)
+		if (p == NULL)
 			continue;
 		p(&head, tokennumber);
-	
 	}
 	printf("number of lines is %d\n", line_num);
 
