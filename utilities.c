@@ -1,4 +1,10 @@
 #include "monty.h"
+/**
+ *_atoi - own atoi
+ *@number: number to convert
+ *
+ *Return: converted int
+ */
 int _atoi(char *number)
 {
 	int value = 0;
@@ -10,12 +16,12 @@ int _atoi(char *number)
 		boo = 1;
 		i++;
 	}
-	while(number[i] != '\0')
+	while (number[i] != '\0')
 	{
 		if (!isdigit(number[i]))
 			return (0);
 
-		value = value*10 + number[i] - '0';
+		value = value * 10 + number[i] - '0';
 		i++;
 	}
 	if (boo == 1)

@@ -2,7 +2,7 @@
 /**
  * _add - add the top two elements of the stack
  *@head: pointer to the head of the linked list
- *@i: unused parameter
+ *@line_num: line number
  */
 void _add(stack_t **head, unsigned int line_num)
 {
@@ -26,7 +26,7 @@ void _add(stack_t **head, unsigned int line_num)
 /**
  *_sub - subtract top two elements of stack
  *@head: pointer to head of the linked list
- *@i: unused parameter
+ *@line_num: keeps track of line count
  */
 void _sub(stack_t **head, unsigned int line_num)
 {
@@ -52,7 +52,7 @@ void _sub(stack_t **head, unsigned int line_num)
  *_div - divides the second top element of the stack
  * by the top element of the stack.
  *@head: pointer to head of the linked list
- *@i: unused parameter
+ *@line_num: keeps track of line count
  */
 void _div(stack_t **head, unsigned int line_num)
 {
@@ -77,7 +77,7 @@ void _div(stack_t **head, unsigned int line_num)
 /**
  *_mul - multiplies the second top element of the stack with the top
  *@head: pointer to head of the linked list
- *@i: unused parameter
+ *@line_num: keeps track of line count
  */
 void _mul(stack_t **head, unsigned int line_num)
 {
@@ -103,7 +103,7 @@ void _mul(stack_t **head, unsigned int line_num)
  * _nop - doesnt do anything
  *
  *@head: unused parameter
- *@i: unused parameter
+ *@i: unused
  *
  */
 void _nop(stack_t **head, unsigned int i)

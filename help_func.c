@@ -3,7 +3,7 @@
 /**
  * _swap - swaps the top two elements in stack
  *@head: pointer to the doubly linked list
- *@i: unused parameter
+ *@line_num: keeps track of line number
  */
 void _swap(stack_t **head, unsigned int line_num)
 {
@@ -34,7 +34,7 @@ void _swap(stack_t **head, unsigned int line_num)
 /**
  * _pop - removes the top element
  * @head: pointer to the doubly linked list
- * @i: unused parameter
+ * @line_num: keeps track of line number
  *
  */
 void _pop(stack_t **head, unsigned int line_num)
@@ -64,7 +64,7 @@ void _pop(stack_t **head, unsigned int line_num)
  * _pint - prints the value at the top of the stack, followed by a new line.
  *
  * @head: pointer to an adress of the doubly linked list
- * @i: unused parameter
+ * @line_num: line number count
  *
  */
 void _pint(stack_t **head, unsigned int line_num)
@@ -72,7 +72,7 @@ void _pint(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	tmp = *head;
-	if (tmp== NULL)
+	if (tmp == NULL)
 	{
 		printf("L%d: can't pint, stack empty\n", line_num);
 		_free(*head);
@@ -109,7 +109,7 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
  * _push - pushes an element to the stack.
  *
  * @head: pointer to an adress of the doubly linked list
- * @pushnum: value of the lement to save
+ * @line_num: value of the lement to save
  *
  */
 void _push(stack_t **head, unsigned int line_num __attribute__ ((unused)))

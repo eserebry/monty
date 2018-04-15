@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <ctype.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -36,17 +36,17 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void _pint(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _pint(stack_t **head, unsigned int line_num);
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)));
-void _push(stack_t **head, unsigned int pushnum);
-void _pop(stack_t **head, unsigned int i __attribute__ ((unused)));
-void _swap(stack_t **head, unsigned int i __attribute__((unused)));
-void _add(stack_t **head, unsigned int i __attribute__ ((unused)));
-void _sub(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _push(stack_t **head, unsigned int line_num __attribute__ ((unused)));
+void _pop(stack_t **head, unsigned int line_num);
+void _swap(stack_t **head, unsigned int line_num);
+void _add(stack_t **head, unsigned int line_num);
+void _sub(stack_t **head, unsigned int line_num);
 void _nop(stack_t **head, unsigned int i);
-void _div(stack_t **head, unsigned int i __attribute__ ((unused)));
-void _mul(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _div(stack_t **head, unsigned int line_num);
+void _mul(stack_t **head, unsigned int line_num);
 void _free(stack_t *head);
-int _atoi(char *token);
-extern int line_num;
+int _atoi(char *number);
+extern int tokennum;
 #endif
