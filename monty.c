@@ -77,7 +77,7 @@ void read_file(const char *file_name)
 
 		token_0 = strtok(strinput, delim);
 		token_1 = strtok(NULL, delim);
-		if (!token_0)
+		if (!token_0 || !strinput)
 			continue;
 
 
@@ -91,7 +91,7 @@ void read_file(const char *file_name)
 		if (token_1 != NULL)
 		{
 			tokennumber = atoi(token_1);
-			if (tokennumber == 0 && (strcmp(token_1, "0") == 0))
+			if (tokennumber == 0 && (strcmp(token_1, "0") != 0))
 			{
 				printf("L%d: usage: push integer\n", line_num);
 				_free(head);
