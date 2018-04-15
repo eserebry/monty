@@ -3,25 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-/*int (*getopcode(char *s))(char *, stack_t)
-  {
-  instruction_t o[] = {
-  {"push", _push},
-  {"pall", _pall},
-  {NULL, NULL}
-  };
-  int i = 0;
 
-  while (o[i].opcode != NULL)
-  {
-  if (strcmp(*o[i].opcode, s) == 0)
-  {
-  return (o[i].f);
-  }
-  i++;
-  }
-  return (0);
-  }*/
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
 
@@ -68,7 +50,8 @@ void _push(stack_t **head, unsigned int pushnum)
 
 	return;
 }
-instruction_t (*getopcode(char *s))(stack_t, unsigned int)
+
+void (*getopcode(char *s))(stack_t, unsigned int)
 {
         instruction_t o[] = {
                 {"push", _push},
@@ -106,15 +89,12 @@ void read_file(const char *file_name)
 	char *strinput = NULL;
 	char **token = NULL;
 	char *delim = "\n ";
-	stack_t *numberstack;
+	stack_t *numberstack = NULL;
 	int tokennumber = 0;
 
 	numberstack = NULL;
 
-	int readcount, line_num = 0;
-	size_t len = 0;
-	char *strinput = NULL, *token;
-	int (*p)(char *, stack_t);
+	void (*p)(stack_t, unsigned int);
 
 	if (file_name == NULL)
 	{
