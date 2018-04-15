@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-int line_num = 0;
+int tokennum = 0;
 /**
  * getopcode - function that selects the correct function
  * to perform the operation asked by the user
@@ -56,7 +56,7 @@ void read_file(const char *file_name)
 	size_t len = 0;
 	char *strinput = NULL, *token_0 = NULL, *token_1 = NULL, *delim = "\n ";
 	stack_t *head;
-	int tokennumber = 0;
+	unsigned int line_num = 0;
 	void (*p)(stack_t **, unsigned int);
 
 	head = NULL;
@@ -90,8 +90,8 @@ void read_file(const char *file_name)
 		}
 		if (token_1 != NULL)
 		{
-			tokennumber = atoi(token_1);
-			if (tokennumber == 0 && (strcmp(token_1, "0") != 0))
+			tokennum = _atoi(token_1);
+			if (tokennum == 0 && (strcmp(token_1, "0") != 0))
 			{
 				printf("L%d: usage: push integer\n", line_num);
 				_free(head);
@@ -104,13 +104,13 @@ void read_file(const char *file_name)
 		if (p == NULL)
 		{
 			printf("L%d: unknown instruction %s\n",
-			       line_num, token_1);
+			       tokennum, token_1);
 			_free(head);
 			free(strinput);
 			exit(EXIT_FAILURE);
 		}
 
-		p(&head, tokennumber);
+		p(&head, line_num);
 	}
 
 	fclose(fd);

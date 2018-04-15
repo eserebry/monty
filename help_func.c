@@ -1,10 +1,11 @@
 #include "monty.h"
+
 /**
  * _swap - swaps the top two elements in stack
  *@head: pointer to the doubly linked list
  *@i: unused parameter
  */
-void _swap(stack_t **head, unsigned int i __attribute__((unused)))
+void _swap(stack_t **head, unsigned int line_num)
 {
 	stack_t *tmp;
 
@@ -36,7 +37,7 @@ void _swap(stack_t **head, unsigned int i __attribute__((unused)))
  * @i: unused parameter
  *
  */
-void _pop(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _pop(stack_t **head, unsigned int line_num)
 {
 	stack_t *tmp;
 
@@ -66,7 +67,7 @@ void _pop(stack_t **head, unsigned int i __attribute__ ((unused)))
  * @i: unused parameter
  *
  */
-void _pint(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _pint(stack_t **head, unsigned int line_num)
 {
 	stack_t *tmp;
 
@@ -111,7 +112,7 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
  * @pushnum: value of the lement to save
  *
  */
-void _push(stack_t **head, unsigned int pushnum)
+void _push(stack_t **head, unsigned int line_num __attribute__ ((unused)))
 {
 	stack_t *new;
 
@@ -122,7 +123,7 @@ void _push(stack_t **head, unsigned int pushnum)
 		_free(*head);
 		exit(EXIT_FAILURE);
 	}
-	new->n = pushnum;
+	new->n = tokennum;
 	new->next = *head;
 	new->prev = NULL;
 	if (*head != NULL)

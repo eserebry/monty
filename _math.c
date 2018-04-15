@@ -4,7 +4,7 @@
  *@head: pointer to the head of the linked list
  *@i: unused parameter
  */
-void _add(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _add(stack_t **head, unsigned int line_num)
 {
 	unsigned int sum = 0;
 	stack_t *tmp;
@@ -28,7 +28,7 @@ void _add(stack_t **head, unsigned int i __attribute__ ((unused)))
  *@head: pointer to head of the linked list
  *@i: unused parameter
  */
-void _sub(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _sub(stack_t **head, unsigned int line_num)
 {
 	unsigned int sub = 0;
 	stack_t *tmp;
@@ -54,7 +54,7 @@ void _sub(stack_t **head, unsigned int i __attribute__ ((unused)))
  *@head: pointer to head of the linked list
  *@i: unused parameter
  */
-void _div(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _div(stack_t **head, unsigned int line_num)
 {
 	unsigned int sub = 0;
 	stack_t *tmp;
@@ -79,7 +79,7 @@ void _div(stack_t **head, unsigned int i __attribute__ ((unused)))
  *@head: pointer to head of the linked list
  *@i: unused parameter
  */
-void _mul(stack_t **head, unsigned int i __attribute__ ((unused)))
+void _mul(stack_t **head, unsigned int line_num)
 {
 	unsigned int sub = 0;
 	stack_t *tmp;
