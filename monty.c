@@ -28,46 +28,46 @@ void _push(stack_t **head, unsigned int pushnum)
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 
-	new->n = pushnum;
+		new->n = pushnum;
 
-	if (*head == NULL)
-	{
-		*head = new;
-		new->prev = NULL;
+		if (*head == NULL)
+		{
+			*head = new;
+			new->prev = NULL;
+			new->next = NULL;
+			return;
+		}
+
+		tmp = *head;
+
+		while(tmp->next)
+			tmp = tmp->next;
+
+		tmp->next = new;
+		new->prev = tmp;
 		new->next = NULL;
-		return;
+
+
 	}
-
-	tmp = *head;
-
-	while(tmp->next)
-		tmp = tmp->next;
-
-	tmp->next = new;
-	new->prev = tmp;
-	new->next = NULL;
-
-	return;
 }
-
-void (*getopcode(char *s))(stack_t, unsigned int)
+void (*getopcode(char *s))(stack_t **, unsigned int)
 {
-        instruction_t o[] = {
-                {"push", _push},
-                {"pall", _pall},
-                {NULL, NULL}
-        };
-        int i = 0;
+	instruction_t o[] = {
+		{"push", _push},
+		{"pall", _pall},
+		{NULL, NULL}
+	};
+	int i = 0;
 
-        while (o[i].opcode != NULL)
-        {
-                if (strcmp(o[i].opcode, s) == 0)
+	while (o[i].opcode != NULL)
+	{
+		if (strcmp(o[i].opcode, s) == 0)
 		{
 			return(o[i].f);
 		}
-                i++;
-        }
-        return (NULL);
+		i++;
+	}
+	return (NULL);
 }
 
 
@@ -86,20 +86,20 @@ void read_file(const char *file_name)
 	int line_num = 0;
 	size_t len = 0;
 	char *strinput = NULL;
-	char **token = NULL;
+	char *token_0 = NULL;
+	char *token_1 = NULL;
 	char *delim = "\n ";
-	stack_t **head = NULL;
+	stack_t **head;
 	int tokennumber = 0;
+	void (*p)(stack_t **, unsigned int);
 
 	*head = NULL;
-
-	void (*p)(stack_t, unsigned int);
 
 	if (file_name == NULL)
 	{
 		printf("Error: Can't open file %s\n", file_name);
-                exit(EXIT_FAILURE);
-        }
+		exit(EXIT_FAILURE);
+	}
 
 
 	fd = fopen(file_name, "r");
@@ -113,36 +113,18 @@ void read_file(const char *file_name)
 	{
 
 
-		token = NULL;
+		token_0 = strtok(strinput, delim);
 
-		token = malloc(sizeof(char *) * 2);
+		token_1 = strtok(NULL, delim);
 
-		token[0] = strtok(strinput, delim);
-
-		token[1] = strtok(NULL, delim);
-
-		tokennumber = atoi(token[1]);
+		tokennumber = atoi(token_1);
 		line_num++;
-		p = getopcode(token[0]);
+		p = getopcode(token_0);
 		//check for p failure
 		if (p == NULL)
 			continue;
+		p(head, tokennumber);
 
-		p(&head, tokennumber);
-
-
-		/*if (strcmp(token[0], "push") == 0)
-		  {
-		  numberstack = _push(tokennumber, &numberstack);
-		  }
-		  else if (strcmp(token[0], "pall") == 0)
-		  {
-
-		  _pall(&numberstack);
-		  }
-		  else
-		  printf("nothingyet: %s\n", token[0]);*/
-		
 
 	}
 
@@ -171,5 +153,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	read_file(argv[1]);
+
 	return (0);
+
 }
