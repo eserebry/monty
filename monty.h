@@ -39,5 +39,9 @@ typedef struct instruction_s
 void _pint(stack_t **head, unsigned int i __attribute__ ((unused)));
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)));
 void _push(stack_t **head, unsigned int pushnum);
+void _pop(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _swap(stack_t **head, unsigned int i __attribute__((unused)));
 void _free(stack_t *head);
+
+extern int line_num;
 #endif

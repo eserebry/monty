@@ -19,6 +19,8 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -42,12 +44,12 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
  *
  * Return: number of letters to print, 0 otherwise
  */
+int line_num = 0;
 void read_file(const char *file_name)
 {
 	FILE *fd;
 
 	int readcount;
-	int line_num = 0;
 	size_t len = 0;
 	char *strinput = NULL;
 	char *token_0 = NULL;

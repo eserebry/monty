@@ -1,5 +1,36 @@
 #include "monty.h"
 /**
+ * _swap - swaps the top two elements in stack
+ *@head: pointer to the doubly linked list
+ *@i: unused parameter
+ */
+void _swap(stack_t **head, unsigned int i __attribute__((unused)))
+{
+	stack_t *tmp;
+
+	if ((*head)->next == NULL)
+	{
+		printf("L%d: can't swap, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = (*head)->next;
+	if ((*head)->next->next == NULL)
+	{
+		(*head)->next = NULL;
+	}
+	else
+		(*head)->next = (*head)->next->next;
+
+	tmp->prev = NULL;
+
+	(*head)->prev = tmp;
+
+	tmp->next = *head;
+
+	*head = tmp;
+}
+/**
  * _pop - removes the top element
  * @head: pointer to the doubly linked list
  * @i: unused parameter
