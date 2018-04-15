@@ -48,6 +48,6 @@ unsigned int i __attribute__ ((unused)));
 void _div(stack_t **head, unsigned int i __attribute__ ((unused)));
 void _mul(stack_t **head, unsigned int i __attribute__ ((unused)));
 void _free(stack_t *head);
-
+int _atoi(char *token);
 extern int line_num;
 #endif
