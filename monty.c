@@ -6,7 +6,6 @@
 
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
-
 	while((*head)->next)
 		*head = (*head)->next;
 
@@ -62,13 +61,13 @@ void (*getopcode(char *s))(stack_t, unsigned int)
 
         while (o[i].opcode != NULL)
         {
-                if (*o[i].opcode == *s)
+                if (strcmp(o[i].opcode, s) == 0)
 		{
 			return(o[i].f);
 		}
                 i++;
         }
-        return (0);
+        return (NULL);
 }
 
 
@@ -89,10 +88,10 @@ void read_file(const char *file_name)
 	char *strinput = NULL;
 	char **token = NULL;
 	char *delim = "\n ";
-	stack_t *numberstack = NULL;
+	stack_t **head = NULL;
 	int tokennumber = 0;
 
-	numberstack = NULL;
+	*head = NULL;
 
 	void (*p)(stack_t, unsigned int);
 
@@ -101,9 +100,6 @@ void read_file(const char *file_name)
 		printf("Error: Can't open file %s\n", file_name);
                 exit(EXIT_FAILURE);
         }
-
-
-	fd = fopen(file_name, "r");
 
 
 	fd = fopen(file_name, "r");
@@ -126,10 +122,13 @@ void read_file(const char *file_name)
 		token[1] = strtok(NULL, delim);
 
 		tokennumber = atoi(token[1]);
-
+		line_num++;
 		p = getopcode(token[0]);
+		//check for p failure
+		if (p == NULL)
+			continue;
 
-		p(tokennumber, &numberstack);
+		p(&head, tokennumber);
 
 
 		/*if (strcmp(token[0], "push") == 0)
@@ -143,6 +142,7 @@ void read_file(const char *file_name)
 		  }
 		  else
 		  printf("nothingyet: %s\n", token[0]);*/
+		
 
 	}
 
