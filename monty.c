@@ -22,7 +22,7 @@
   }
   return (0);
   }*/
-void _pall(stack_t **head)
+void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
 
 	while((*head)->next)
@@ -36,25 +36,16 @@ void _pall(stack_t **head)
 
 }
 
-stack_t *_push(char *tokentwo, stack_t **head)
+void _push(stack_t **head, unsigned int pushnum)
 {
-	int pushnum = 0;
 	stack_t *new;
 	stack_t *tmp;
-	stack_t opcodes[] = {
-		{"push", _push},
-		{"pall", _pall},
-		{NULL, NULL}
-	};
-
-	pushnum = atoi(tokentwo);
-
-	if (pushnum == 0)
-		exit(EXIT_FAILURE);
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
-		return (NULL);
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 
 	new->n = pushnum;
 
@@ -63,7 +54,7 @@ stack_t *_push(char *tokentwo, stack_t **head)
 		*head = new;
 		new->prev = NULL;
 		new->next = NULL;
-		return (new);
+		return;
 	}
 
 	tmp = *head;
@@ -75,9 +66,9 @@ stack_t *_push(char *tokentwo, stack_t **head)
 	new->prev = tmp;
 	new->next = NULL;
 
-	return (*head);
+	return;
 }
-instruction_t (*getopcode(char *s))(char *, stack_t)
+instruction_t (*getopcode(char *s))(stack_t, unsigned int)
 {
         instruction_t o[] = {
                 {"push", _push},
@@ -88,9 +79,9 @@ instruction_t (*getopcode(char *s))(char *, stack_t)
 
         while (o[i].opcode != NULL)
         {
-                if (strcmp(*o[i].opcode, s) == 0)
+                if (*o[i].opcode == *s)
 		{
-			return (o[i].f);
+			return(o[i].f);
 		}
                 i++;
         }
@@ -116,6 +107,7 @@ void read_file(const char *file_name)
 	char **token = NULL;
 	char *delim = "\n ";
 	stack_t *numberstack;
+	int tokennumber = 0;
 
 	numberstack = NULL;
 
@@ -153,14 +145,16 @@ void read_file(const char *file_name)
 
 		token[1] = strtok(NULL, delim);
 
+		tokennumber = atoi(token[1]);
+
 		p = getopcode(token[0]);
 
-		p(token[1], &numberstack);
+		p(tokennumber, &numberstack);
 
 
 		/*if (strcmp(token[0], "push") == 0)
 		  {
-		  numberstack = _push(token[1], &numberstack);
+		  numberstack = _push(tokennumber, &numberstack);
 		  }
 		  else if (strcmp(token[0], "pall") == 0)
 		  {
