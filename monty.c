@@ -6,6 +6,11 @@
 
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
+
+	if (*head == NULL || head == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
 	while((*head)->next)
 		*head = (*head)->next;
 
@@ -20,36 +25,30 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 void _push(stack_t **head, unsigned int pushnum)
 {
 	stack_t *new;
-	stack_t *tmp;
-
+	printf("in _push func\n");
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-
-		new->n = pushnum;
-
-		if (*head == NULL)
-		{
-			*head = new;
-			new->prev = NULL;
-			new->next = NULL;
-			return;
-		}
-
-		tmp = *head;
-
-		while(tmp->next)
-			tmp = tmp->next;
-
-		tmp->next = new;
-		new->prev = tmp;
+	}
+	new->n = pushnum;
+	new->prev = NULL;
+	printf("B\n");
+	if (head == NULL || *head)
+	{
+		printf("here\n");
 		new->next = NULL;
-
-
+		*head = new;
+	}
+	else
+	{
+		new->next = (*head);
+		(*head)->prev = new;
+		*head = new;
 	}
 }
+
 void (*getopcode(char *s))(stack_t **, unsigned int)
 {
 	instruction_t o[] = {
@@ -58,6 +57,7 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 		{NULL, NULL}
 	};
 	int i = 0;
+	printf("A\n");
 
 	while (o[i].opcode != NULL)
 	{
@@ -89,11 +89,11 @@ void read_file(const char *file_name)
 	char *token_0 = NULL;
 	char *token_1 = NULL;
 	char *delim = "\n ";
-	stack_t **head;
+	stack_t *head;
 	int tokennumber = 0;
 	void (*p)(stack_t **, unsigned int);
 
-	*head = NULL;
+
 
 	if (file_name == NULL)
 	{
@@ -120,11 +120,11 @@ void read_file(const char *file_name)
 		tokennumber = atoi(token_1);
 		line_num++;
 		p = getopcode(token_0);
-		//check for p failure
+		printf("%d\n", line_num);
 		if (p == NULL)
 			continue;
-		p(head, tokennumber);
-
+		p(&head, tokennumber);
+		printf("end\n");
 
 	}
 
