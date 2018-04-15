@@ -85,13 +85,19 @@ void read_file(const char *file_name)
 		line_num++;
 		p = getopcode(token_0);
 		if (p == NULL)
-			continue;
+		{
+			printf("L%d: unknown instruction %s\n", line_num, token_1);
+			_free(head);
+			free(strinput);
+			exit(EXIT_FAILURE);
+		}
+
 		p(&head, tokennumber);
 	}
-	printf("number of lines is %d\n", line_num);
 
 	fclose(fd);
 	free(strinput);
+	_free(head);
 }
 
 /**

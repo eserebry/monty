@@ -64,6 +64,7 @@ void _push(stack_t **head, unsigned int pushnum)
 	if (new == NULL)
 	{
 		printf("Error: malloc failed\n");
+		_free(*head);
 		exit(EXIT_FAILURE);
 	}
 	new->n = pushnum;
