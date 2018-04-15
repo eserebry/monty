@@ -77,10 +77,14 @@ void read_file(const char *file_name)
 		token_1 = strtok(NULL, delim);
 		if (!token_0)
 			continue;
+		if ((strcmp(token_0, "push") == 0) && token_1 == NULL)
+		{
+			printf("L%d: usage: push integer\n", line_num);
+		}
 		if (token_1 != NULL)
 		{
 			tokennumber = atoi(token_1);
-			if (tokennumber == 0 && token_1 != '0')
+			if (tokennumber == 0 && (strcmp(token_1, "0") == 0))
 			{
 				printf("L%d: usage: push integer\n", line_num);
 				_free(head);
@@ -97,6 +101,7 @@ void read_file(const char *file_name)
 			free(strinput);
 			exit(EXIT_FAILURE);
 		}
+
 		p(&head, tokennumber);
 	}
 	fclose(fd);
