@@ -71,7 +71,7 @@ void _pint(stack_t **head, unsigned int i __attribute__ ((unused)))
 	stack_t *tmp;
 
 	tmp = *head;
-	if (head == NULL || *head == NULL)
+	if (tmp== NULL)
 	{
 		printf("L%d: can't pint, stack empty\n", line_num);
 		_free(*head);
