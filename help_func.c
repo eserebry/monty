@@ -1,5 +1,33 @@
 #include "monty.h"
+/**
+ * _pop - removes the top element
+ * @head: pointer to the doubly linked list
+ * @i: unused parameter
+ *
+ */
+void _pop(stack_t **head, unsigned int i __attribute__ ((unused)))
+{
+	stack_t *tmp;
 
+	if (head == NULL)
+	{
+		printf("L%d: can't pop an empty stack\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	tmp = *head;
+	if ((*head)->next != NULL)
+	{
+		*head = (*head)->next;
+
+		(*head)->prev = NULL;
+		free(tmp);
+	}
+	else
+	{
+		free(tmp);
+		*head = NULL;
+	}
+}
 /**
  * _pint - prints the value at the top of the stack, followed by a new line.
  *
@@ -13,7 +41,10 @@ void _pint(stack_t **head, unsigned int i __attribute__ ((unused)))
 
 	tmp = *head;
 	if (tmp == NULL)
-		exit(0);
+	{
+		printf("L%d: can't pint, stack empty\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	while (tmp->next != NULL)
 	{
 		tmp = tmp->next;
