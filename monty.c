@@ -3,10 +3,27 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+/*int (*getopcode(char *s))(char *, stack_t)
+  {
+  instruction_t o[] = {
+  {"push", _push},
+  {"pall", _pall},
+  {NULL, NULL}
+  };
+  int i = 0;
 
+  while (o[i].opcode != NULL)
+  {
+  if (strcmp(*o[i].opcode, s) == 0)
+  {
+  return (o[i].f);
+  }
+  i++;
+  }
+  return (0);
+  }*/
 void _pall(stack_t **head)
 {
-	stack_t tmp;
 
 	while((*head)->next)
 		*head = (*head)->next;
@@ -60,6 +77,25 @@ stack_t *_push(char *tokentwo, stack_t **head)
 
 	return (*head);
 }
+instruction_t (*getopcode(char *s))(char *, stack_t)
+{
+        instruction_t o[] = {
+                {"push", _push},
+                {"pall", _pall},
+                {NULL, NULL}
+        };
+        int i = 0;
+
+        while (o[i].opcode != NULL)
+        {
+                if (strcmp(*o[i].opcode, s) == 0)
+		{
+			return (o[i].f);
+		}
+                i++;
+        }
+        return (0);
+}
 
 
 /**
@@ -75,23 +111,18 @@ void read_file(const char *file_name)
 
 	int readcount;
 	int line_num = 0;
-	int i;
 	size_t len = 0;
 	char *strinput = NULL;
 	char **token = NULL;
 	char *delim = "\n ";
 	stack_t *numberstack;
-	stack_t opcode[] = {
-		{"push", _push},
-		{"pall", _pall},
-		{NULL, NULL}
-	};
+
 	numberstack = NULL;
 
 	int readcount, line_num = 0;
 	size_t len = 0;
 	char *strinput = NULL, *token;
-
+	int (*p)(char *, stack_t);
 
 	if (file_name == NULL)
 	{
@@ -115,71 +146,33 @@ void read_file(const char *file_name)
 
 
 		token = NULL;
-		i = 0;
+
 		token = malloc(sizeof(char *) * 2);
 
 		token[0] = strtok(strinput, delim);
 
 		token[1] = strtok(NULL, delim);
 
+		p = getopcode(token[0]);
+
+		p(token[1], &numberstack);
 
 
-		while (opcode[i].f != NULL)
-		{
-			
-		}
+		/*if (strcmp(token[0], "push") == 0)
+		  {
+		  numberstack = _push(token[1], &numberstack);
+		  }
+		  else if (strcmp(token[0], "pall") == 0)
+		  {
 
-		if (strcmp(token[0], "push") == 0)
-		{
-			numberstack = _push(token[1], &numberstack);
-		}
-		else if (strcmp(token[0], "pall") == 0)
-		{
+		  _pall(&numberstack);
+		  }
+		  else
+		  printf("nothingyet: %s\n", token[0]);*/
 
-			_pall(&numberstack);
-		}
-		else
-			printf("nothingyet: %s\n", token[0]);
-
-		/*	else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
-			 || strcmp(token, "pop") == 0 || strcmp(token, "swap") == 0
-			 ||strcmp(token, "add") == 0 || strcmp(token, "nop") == 0)
-
-		if (readcount == -1)
-		{
-			printf("Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
-		token = strtok(strinput, " ");
-		while (token != NULL)
-		{
-			if (strcmp(token, "push") == 0)
-			{
-				token = strtok(NULL, " ");
-				printf("%s", token);
-				break;
-			}
-			else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
-			    || strcmp(token, "pop") == 0 || strcmp(token, "swap") == 0
-			    ||strcmp(token, "add") == 0 || strcmp(token, "nop") == 0)
-				break;
-
-			/*if (strcmp(token, "pall") != 0 || strcmp(token, "pint") != 0
-			     || strcmp(token, "pop") != 0 || strcmp(token, "swap") != 0
-			     ||strcmp(token, "add") != 0 || strcmp(token, "nop") != 0) 
-			{
-				printf("L%d: unknown instruction %s\n", line_num, token);
-				exit(EXIT_FAILURE);
-			}*/
-
-		line_num ++;
 	}
 
 
-			token = strtok(NULL, " ");
-		}
-		line_num ++;
-	}
 	printf("number of lines is %d\n", line_num);
 
 	fclose(fd);
@@ -187,13 +180,13 @@ void read_file(const char *file_name)
 }
 
 /**
-*main - calling red_file function as well as error management
-*
-*@argc: argument count
-*@argv: pointer to an adress of the argument
-*
-*Return: 0, always success
-*/
+ *main - calling red_file function as well as error management
+ *
+ *@argc: argument count
+ *@argv: pointer to an adress of the argument
+ *
+ *Return: 0, always success
+ */
 int main(int argc, char *argv[])
 {
 
