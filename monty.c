@@ -76,7 +76,7 @@ void read_file(const char *file_name)
 		token_0 = strtok(strinput, delim);
 		token_1 = strtok(NULL, delim);
 		if (token_1 != NULL)
-			tokennumber = _atoi(token_1);
+			tokennumber = atoi(token_1);
 		line_num++;
 		p = getopcode(token_0);
 		if (p == NULL)

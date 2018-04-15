@@ -106,8 +106,8 @@ void _mul(stack_t **head, unsigned int i __attribute__ ((unused)))
  *@i: unused parameter
  *
  */
-void _nop(stack_t **head __attribute__ ((unused)),
-	  unsigned int i __attribute__ ((unused)))
+void _nop(stack_t **head, unsigned int i)
 {
-
+	(void)head;
+	(void)i;
 }
