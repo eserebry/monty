@@ -73,13 +73,20 @@ void read_file(const char *file_name)
 	}
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
+		line_num++;
+
 		token_0 = strtok(strinput, delim);
 		token_1 = strtok(NULL, delim);
 		if (!token_0)
 			continue;
+
+
 		if ((strcmp(token_0, "push") == 0) && token_1 == NULL)
 		{
 			printf("L%d: usage: push integer\n", line_num);
+			_free(head);
+			free(strinput);
+			exit(EXIT_FAILURE);
 		}
 		if (token_1 != NULL)
 		{
@@ -92,11 +99,12 @@ void read_file(const char *file_name)
 				exit(EXIT_FAILURE);
 			}
 		}
-		line_num++;
+
 		p = getopcode(token_0);
 		if (p == NULL)
 		{
-			printf("L%d: unknown instruction %s\n", line_num, token_1);
+			printf("L%d: unknown instruction %s\n",
+			       line_num, token_1);
 			_free(head);
 			free(strinput);
 			exit(EXIT_FAILURE);
@@ -104,6 +112,7 @@ void read_file(const char *file_name)
 
 		p(&head, tokennumber);
 	}
+
 	fclose(fd);
 	free(strinput);
 	_free(head);
