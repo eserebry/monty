@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+
 void _pall(stack_t **head)
 {
 	stack_t tmp;
@@ -60,6 +61,7 @@ stack_t *_push(char *tokentwo, stack_t **head)
 	return (*head);
 }
 
+
 /**
  *read_file - reads a text file (and prints it to a standart output)
  *
@@ -70,6 +72,7 @@ stack_t *_push(char *tokentwo, stack_t **head)
 void read_file(const char *file_name)
 {
 	FILE *fd;
+
 	int readcount;
 	int line_num = 0;
 	int i;
@@ -85,11 +88,20 @@ void read_file(const char *file_name)
 	};
 	numberstack = NULL;
 
+	int readcount, line_num = 0;
+	size_t len = 0;
+	char *strinput = NULL, *token;
+
+
 	if (file_name == NULL)
 	{
 		printf("Error: Can't open file %s\n", file_name);
                 exit(EXIT_FAILURE);
         }
+
+
+	fd = fopen(file_name, "r");
+
 
 	fd = fopen(file_name, "r");
 
@@ -100,6 +112,7 @@ void read_file(const char *file_name)
 	}
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
+
 
 		token = NULL;
 		i = 0;
@@ -131,6 +144,26 @@ void read_file(const char *file_name)
 		/*	else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
 			 || strcmp(token, "pop") == 0 || strcmp(token, "swap") == 0
 			 ||strcmp(token, "add") == 0 || strcmp(token, "nop") == 0)
+
+		if (readcount == -1)
+		{
+			printf("Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
+		token = strtok(strinput, " ");
+		while (token != NULL)
+		{
+			if (strcmp(token, "push") == 0)
+			{
+				token = strtok(NULL, " ");
+				printf("%s", token);
+				break;
+			}
+			else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
+			    || strcmp(token, "pop") == 0 || strcmp(token, "swap") == 0
+			    ||strcmp(token, "add") == 0 || strcmp(token, "nop") == 0)
+				break;
+
 			/*if (strcmp(token, "pall") != 0 || strcmp(token, "pint") != 0
 			     || strcmp(token, "pop") != 0 || strcmp(token, "swap") != 0
 			     ||strcmp(token, "add") != 0 || strcmp(token, "nop") != 0) 
@@ -138,8 +171,16 @@ void read_file(const char *file_name)
 				printf("L%d: unknown instruction %s\n", line_num, token);
 				exit(EXIT_FAILURE);
 			}*/
+
 		line_num ++;
 	}
+
+
+			token = strtok(NULL, " ");
+		}
+		line_num ++;
+	}
+	printf("number of lines is %d\n", line_num);
 
 	fclose(fd);
 	free (strinput);
@@ -155,6 +196,7 @@ void read_file(const char *file_name)
 */
 int main(int argc, char *argv[])
 {
+
 
 	if (argc != 2)
 	{
