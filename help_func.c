@@ -114,6 +114,10 @@ void _push(stack_t **head, unsigned int pushnum)
 {
 	stack_t *new;
 
+	if (pushnum == NULL)
+	{
+		printf("L%d: usage: push integer\n", line_num);
+	}
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{

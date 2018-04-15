@@ -78,10 +78,18 @@ void read_file(const char *file_name)
 		if (!token_0)
 			continue;
 		if (token_1 != NULL)
+		{
 			tokennumber = atoi(token_1);
+			if (tokennumber == 0 && token_1 != '0')
+			{
+				printf("L%d: usage: push integer\n", line_num);
+				_free(head);
+				free(strinput);
+				exit(EXIT_FAILURE);
+			}
+		}
 		line_num++;
 		p = getopcode(token_0);
-		
 		if (p == NULL)
 		{
 			printf("L%d: unknown instruction %s\n", line_num, token_1);
