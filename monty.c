@@ -11,7 +11,7 @@
  *
  * Return: number of letters to print, 0 otherwise
  */
-int read_file(const char *file_name)
+void read_file(const char *file_name)
 {
 	FILE *fd;
 	int readcount, line_num = 0;
@@ -19,12 +19,15 @@ int read_file(const char *file_name)
 	char *strinput = NULL, *token;
 
 	if (file_name == NULL)
-		return (0);
+	{
+		printf("Error: Can't open file %s\n", file_name);
+                exit(EXIT_FAILURE);
+        }
 	fd = fopen(file_name, "r");
 	if (fd == NULL)
 	{
 		printf("Error: Can't open file %s\n", file_name);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
@@ -60,7 +63,6 @@ int read_file(const char *file_name)
 	printf("number of lines is %d\n", line_num);
 	fclose(fd);
 	free (strinput);
-	return (0);
 }
 
 /**
