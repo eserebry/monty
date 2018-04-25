@@ -14,6 +14,7 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 	while((*head)->next)
 		*head = (*head)->next;
 
+	printf("_pall\n");
 	while(*head)
 	{
 		printf("%d\n", (*head)->n);
@@ -116,8 +117,8 @@ void read_file(const char *file_name)
 		token_0 = strtok(strinput, delim);
 
 		token_1 = strtok(NULL, delim);
-
-		tokennumber = atoi(token_1);
+		if (token_1 != NULL)
+			tokennumber = atoi(token_1);
 		line_num++;
 		p = getopcode(token_0);
 		printf("%d\n", line_num);
