@@ -14,7 +14,7 @@
 int read_file(const char *file_name)
 {
 	FILE *fd;
-	int readcount/*, tok = 0*/,line_num = 0;
+	int readcount, line_num = 0;
 	size_t len = 0;
 	char *strinput = NULL, *token;
 
@@ -30,7 +30,8 @@ int read_file(const char *file_name)
 	{
 		if (readcount == -1)
 		{
-			exit(0);
+			printf("Error: malloc failed\n");
+			exit(EXIT_FAILURE);
 		}
 		token = strtok(strinput, " ");
 		while (token != NULL)
@@ -57,6 +58,8 @@ int read_file(const char *file_name)
 		line_num ++;
 	}
 	printf("number of lines is %d\n", line_num);
+	fclose(fd);
+	free (strinput);
 	return (0);
 }
 
