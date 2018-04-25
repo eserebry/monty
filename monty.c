@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 
+
 /**
  *read_file - reads a text file (and prints it to a standart output)
  *
@@ -14,7 +15,7 @@
 void read_file(const char *file_name)
 {
 	FILE *fd;
-	int readcount, line_num = 0;
+	int readcount, line_num = 0, push_token = 0;
 	size_t len = 0;
 	char *strinput = NULL, *token;
 
@@ -42,7 +43,9 @@ void read_file(const char *file_name)
 			if (strcmp(token, "push") == 0)
 			{
 				token = strtok(NULL, " ");
-				printf("%s", token);
+				push_token = atoi(token);
+				printf("kuku %d \n", push_token);
+				push(push_token);
 				break;
 			}
 			else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
@@ -60,11 +63,21 @@ void read_file(const char *file_name)
 		}
 		line_num ++;
 	}
+	/*for (i = top; i >= 0; --i)
+	  printf*/
 	printf("number of lines is %d\n", line_num);
 	fclose(fd);
 	free (strinput);
 }
 
+void push(value)
+{
+	
+
+        int stack[100], top = -1;
+        stack[top] = value;
+	printf("push eto %d\n", stack[top]);
+}
 /**
 *main - calling red_file function as well as error management
 *
