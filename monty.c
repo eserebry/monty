@@ -14,7 +14,7 @@
 int read_file(const char *file_name)
 {
 	FILE *fd;
-	int readcount/*, tok = 0*/, i = 0;
+	int readcount/*, tok = 0*/;
 	size_t len = 0;
 	char *strinput = NULL, *token;
 
@@ -32,8 +32,13 @@ int read_file(const char *file_name)
 		token = strtok(strinput, " ");
 		while (token != NULL)
 		{
-			printf("%s", token);
-			token = strtok(NULL, " ");
+			if (strcmp(token, "push") == 0)
+			{
+				token = strtok(NULL, " ");
+				printf("%s", token);
+			}
+			else
+				token = strtok(NULL, " ");
 		}
 	}
 	return (0);
