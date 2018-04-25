@@ -6,27 +6,24 @@
 
 void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
+	stack_t *tmp;
 
-	if (*head == NULL || head == NULL)
+	printf("pall\n");
+	tmp = *head;
+	
+	while(tmp != NULL)
 	{
-		exit(EXIT_FAILURE);
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
-	while((*head)->next)
-		*head = (*head)->next;
-
-	printf("_pall\n");
-	while(*head)
-	{
-		printf("%d\n", (*head)->n);
-		*head = (*head)->prev;
-	}
-
 }
 
 void _push(stack_t **head, unsigned int pushnum)
 {
 	stack_t *new;
-	printf("in _push func\n");
+	stack_t *tmp;
+
+	tmp = *head;
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
@@ -35,8 +32,7 @@ void _push(stack_t **head, unsigned int pushnum)
 	}
 	new->n = pushnum;
 	new->prev = NULL;
-	printf("B\n");
-	if (head == NULL || *head)
+	if (head == NULL || *head == NULL)
 	{
 		printf("here\n");
 		new->next = NULL;
@@ -44,8 +40,8 @@ void _push(stack_t **head, unsigned int pushnum)
 	}
 	else
 	{
-		new->next = (*head);
-		(*head)->prev = new;
+		new->next = tmp;
+		tmp->prev = new;
 		*head = new;
 	}
 }
@@ -58,7 +54,6 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 		{NULL, NULL}
 	};
 	int i = 0;
-	printf("A\n");
 
 	while (o[i].opcode != NULL)
 	{
@@ -121,15 +116,11 @@ void read_file(const char *file_name)
 			tokennumber = atoi(token_1);
 		line_num++;
 		p = getopcode(token_0);
-		printf("%d\n", line_num);
-		if (p == NULL)
+			if (p == NULL)
 			continue;
 		p(&head, tokennumber);
-		printf("end\n");
-
+	
 	}
-
-
 	printf("number of lines is %d\n", line_num);
 
 	fclose(fd);
