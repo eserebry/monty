@@ -14,7 +14,7 @@
 int read_file(const char *file_name)
 {
 	FILE *fd;
-	int readcount/*, tok = 0*/;
+	int readcount/*, tok = 0*/,line_num = 0;
 	size_t len = 0;
 	char *strinput = NULL, *token;
 
@@ -22,7 +22,10 @@ int read_file(const char *file_name)
 		return (0);
 	fd = fopen(file_name, "r");
 	if (fd == NULL)
+	{
+		printf("Error: Can't open file %s\n", file_name);
 		return (0);
+	}
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
 		if (readcount == -1)
@@ -36,11 +39,24 @@ int read_file(const char *file_name)
 			{
 				token = strtok(NULL, " ");
 				printf("%s", token);
+				break;
 			}
-			else
-				token = strtok(NULL, " ");
+			else if (strcmp(token, "pall") == 0 || strcmp(token, "pint") == 0
+			    || strcmp(token, "pop") == 0 || strcmp(token, "swap") == 0
+			    ||strcmp(token, "add") == 0 || strcmp(token, "nop") == 0)
+				break;
+			/*if (strcmp(token, "pall") != 0 || strcmp(token, "pint") != 0
+			     || strcmp(token, "pop") != 0 || strcmp(token, "swap") != 0
+			     ||strcmp(token, "add") != 0 || strcmp(token, "nop") != 0) 
+			{
+				printf("L%d: unknown instruction %s\n", line_num, token);
+				exit(EXIT_FAILURE);
+			}*/
+			token = strtok(NULL, " ");
 		}
+		line_num ++;
 	}
+	printf("number of lines is %d\n", line_num);
 	return (0);
 }
 
