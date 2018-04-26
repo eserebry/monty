@@ -8,22 +8,21 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
 	stack_t *tmp;
 
-	printf("pall\n");
 	tmp = *head;
+	printf("pall\n");
 	
 	while(tmp != NULL)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
+		
 	}
 }
 
 void _push(stack_t **head, unsigned int pushnum)
 {
 	stack_t *new;
-	stack_t *tmp;
 
-	tmp = *head;
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
@@ -31,19 +30,14 @@ void _push(stack_t **head, unsigned int pushnum)
 		exit(EXIT_FAILURE);
 	}
 	new->n = pushnum;
+	new->next = *head;
 	new->prev = NULL;
-	if (head == NULL || *head == NULL)
+	if (*head != NULL)
 	{
 		printf("here\n");
-		new->next = NULL;
-		*head = new;
+		(*head)->prev = new; 
 	}
-	else
-	{
-		new->next = tmp;
-		tmp->prev = new;
-		*head = new;
-	}
+	(*head) = new;
 }
 
 void (*getopcode(char *s))(stack_t **, unsigned int)
