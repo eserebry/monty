@@ -54,7 +54,7 @@ void read_file(const char *file_name)
 	FILE *fd;
 	int readcount;
 	size_t len = 0;
-	char *strinput = NULL, char *token_0 = NULL, *token_1 = NULL, *delim = "\n ";
+	char *strinput = NULL, *token_0 = NULL, *token_1 = NULL, *delim = "\n ";
 	stack_t *head;
 	int tokennumber = 0;
 	void (*p)(stack_t **, unsigned int);
