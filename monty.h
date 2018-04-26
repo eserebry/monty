@@ -35,4 +35,9 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+void _pint(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _pall(stack_t **head, unsigned int i __attribute__ ((unused)));
+void _push(stack_t **head, unsigned int pushnum);
+
 #endif

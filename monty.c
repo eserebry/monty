@@ -4,48 +4,21 @@
 #include <unistd.h>
 #include <string.h>
 
-void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
-{
-	stack_t *tmp;
-	int count = 0;
-
-	tmp = *head;
-
-	while(tmp != NULL)
-	{
-
-		printf("%d\n", tmp->n);
-		count++;
-		tmp = tmp->next;
-	}
-}
-
-void _push(stack_t **head, unsigned int pushnum)
-{
-	stack_t *new;
-
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	new->n = pushnum;;
-	new->next = *head;
-	new->prev = NULL;
-	if (*head != NULL)
-	{
-		(*head)->prev = new;
-	}
-
-	*head = new;
-}
-
+/**
+ * getopcode - function that selects the correct function
+ * to perform the operation asked by the user
+ *
+ * @s: operator passed as argument to the program
+ *
+ * Return: pointer to the function that corresponds to the operator
+ * given as a parameter
+ */
 void (*getopcode(char *s))(stack_t **, unsigned int)
 {
 	instruction_t o[] = {
 		{"push", _push},
 		{"pall", _pall},
+		{"pint", _pint},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -54,7 +27,7 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 	{
 		if (strcmp(o[i].opcode, s) == 0)
 		{
-			return(o[i].f);
+			return (o[i].f);
 		}
 		i++;
 	}
@@ -118,7 +91,7 @@ void read_file(const char *file_name)
 	printf("number of lines is %d\n", line_num);
 
 	fclose(fd);
-	free (strinput);
+	free(strinput);
 }
 
 /**
