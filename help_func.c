@@ -76,15 +76,7 @@ void _pint(stack_t **head, unsigned int i __attribute__ ((unused)))
 		printf("L%d: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	while (tmp != NULL)
-	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->prev;
-	}
+	printf("%d\n", tmp->n);
 }
 
 /**
