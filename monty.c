@@ -79,7 +79,7 @@ void read_file(const char *file_name)
 	char *strinput = NULL;
 	char *token_0 = NULL;
 	char *token_1 = NULL;
-	char *delim = " ";
+	char *delim = "\n ";
 	stack_t *head;
 	int tokennumber = 0;
 	void (*p)(stack_t **, unsigned int);
