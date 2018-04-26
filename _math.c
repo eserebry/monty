@@ -10,6 +10,11 @@ void _add(stack_t **head, unsigned int i __attribute__ ((unused)))
 	stack_t *tmp;
 
 	tmp = *head;
+	if ((*head)->next == NULL)
+	{
+		printf("L%d: can't add, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	sum = (*head)->n + (*head)->next->n;
 	(*head)->next->n = sum;
 
