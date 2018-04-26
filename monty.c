@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-
+int line_num = 0;
 /**
  * getopcode - function that selects the correct function
  * to perform the operation asked by the user
@@ -23,6 +23,9 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 		{"swap", _swap},
 		{"add", _add},
 		{"sub", _sub},
+		{"mul", _mul},
+		{"div", _div},
+		{"nop", _nop},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -46,32 +49,23 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
  *
  * Return: number of letters to print, 0 otherwise
  */
-int line_num = 0;
 void read_file(const char *file_name)
 {
 	FILE *fd;
-
 	int readcount;
 	size_t len = 0;
-	char *strinput = NULL;
-	char *token_0 = NULL;
-	char *token_1 = NULL;
-	char *delim = "\n ";
+	char *strinput = NULL, char *token_0 = NULL, *token_1 = NULL, *delim = "\n ";
 	stack_t *head;
 	int tokennumber = 0;
 	void (*p)(stack_t **, unsigned int);
 
 	head = NULL;
-
 	if (file_name == NULL)
 	{
 		printf("Error: Can't open file %s\n", file_name);
 		exit(EXIT_FAILURE);
 	}
-
-
 	fd = fopen(file_name, "r");
-
 	if (fd == NULL)
 	{
 		printf("Error: Can't open file %s\n", file_name);
@@ -79,10 +73,7 @@ void read_file(const char *file_name)
 	}
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
-
-
 		token_0 = strtok(strinput, delim);
-
 		token_1 = strtok(NULL, delim);
 		if (token_1 != NULL)
 			tokennumber = atoi(token_1);
@@ -95,10 +86,8 @@ void read_file(const char *file_name)
 			free(strinput);
 			exit(EXIT_FAILURE);
 		}
-
 		p(&head, tokennumber);
 	}
-
 	fclose(fd);
 	free(strinput);
 	_free(head);

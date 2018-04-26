@@ -34,6 +34,11 @@ void _sub(stack_t **head, unsigned int i __attribute__ ((unused)))
 	stack_t *tmp;
 
 	tmp = *head;
+	if ((*head)->next == NULL)
+	{
+		printf("L%d: can't sub, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	sub = (*head)->next->n - (*head)->n;
 	(*head)->next->n = sub;
 
@@ -55,6 +60,11 @@ void _div(stack_t **head, unsigned int i __attribute__ ((unused)))
 	stack_t *tmp;
 
 	tmp = *head;
+	if ((*head)->next == NULL)
+	{
+		printf("L%d: can't div, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	sub = (*head)->next->n / (*head)->n;
 	(*head)->next->n = sub;
 
@@ -75,6 +85,11 @@ void _mul(stack_t **head, unsigned int i __attribute__ ((unused)))
 	stack_t *tmp;
 
 	tmp = *head;
+	if ((*head)->next == NULL)
+	{
+		printf("L%d: can't mul, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	sub = (*head)->next->n * (*head)->n;
 	(*head)->next->n = sub;
 
@@ -82,4 +97,17 @@ void _mul(stack_t **head, unsigned int i __attribute__ ((unused)))
 	(*head)->prev = NULL;
 
 	free(tmp);
+}
+
+/**
+ * _nop - doesnt do anything
+ *
+ *@head: unused parameter
+ *@i: unused parameter
+ *
+ */
+void _nop(stack_t **head __attribute__ ((unused)),
+	  unsigned int i __attribute__ ((unused)))
+{
+
 }
