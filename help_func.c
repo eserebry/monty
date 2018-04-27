@@ -69,7 +69,6 @@ void _pop(stack_t **head, unsigned int line_num)
  */
 void _pint(stack_t **head, unsigned int line_num)
 {
-	stack_t *tmp;
 
 	if (head == NULL || *head == NULL)
 	{
