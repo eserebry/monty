@@ -99,45 +99,12 @@ void read_file(const char *file_name)
 			free(strinput);
 			exit(EXIT_FAILURE);
 		}
-
-		/*if (strcmp(token_0, "push") == 0 && token_1 != NULL)
-		{
-			printf("its push and second value is not empty\n");
-			if (_isdigit(token_1) == 1)
-				tokennum = atoi(token_1);
-			else if (_isdigit(token_1) == 0)
-			{
-				printf("i am here\n");
-                                printf("L%d: usage: push integer\n", line_num);
-                                _free(head);
-                                free(strinput);
-                                exit(EXIT_FAILURE);
-                        }
-			if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
-			{
-				printf("L%d: usage: push integer\n", line_num);
-				_free(head);
-				free(strinput);
-				exit(EXIT_FAILURE);
-				}
-		}*/
-		
-
-
-
 		if (token_1 != NULL)
 		{
 			tokennum = _atoi(token_1);
-			/*if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
-			{
-				printf("L%d: usage: push integer\n", line_num);
-				_free(head);
-				free(strinput);
-				exit(EXIT_FAILURE);
-				}*/
 			if ((strcmp(token_0, "push") == 0 && tokennum == 0 && (strcmp(token_1, "0") != 0)))
 			{
-                                printf("L%d: usage: push integer please\n", line_num);
+                                printf("L%d: usage: push integer\n", line_num);
                                 _free(head);
                                 free(strinput);
                                 exit(EXIT_FAILURE);
@@ -148,7 +115,7 @@ void read_file(const char *file_name)
 		if (p == NULL)
 		{
 			printf("L%d: unknown instruction %s\n",
-			       tokennum, token_0);
+			       line_num, token_0);
 			_free(head);
 			free(strinput);
 			exit(EXIT_FAILURE);
