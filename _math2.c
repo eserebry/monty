@@ -12,7 +12,7 @@ void _mod(stack_t **head, unsigned int line_num)
 
 	if ((*head) == NULL || (*head)->next == NULL)
 	{
-		printf("L%d: can't add, stack too short\n", line_num);
+		printf("L%d: can't mod, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 	tmp = *head;
