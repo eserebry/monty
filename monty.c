@@ -99,7 +99,7 @@ void read_file(const char *file_name)
 			exit(EXIT_FAILURE);
 		}
 
-		if (strcmp(token_0, "push") == 0 && token_1 != NULL)
+		/*if (strcmp(token_0, "push") == 0 && token_1 != NULL)
 		{
 			printf("its push and second value is not empty\n");
 			if (_isdigit(token_1) == 1)
@@ -112,19 +112,19 @@ void read_file(const char *file_name)
                                 free(strinput);
                                 exit(EXIT_FAILURE);
                         }
-			/*if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
+			if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
 			{
 				printf("L%d: usage: push integer\n", line_num);
 				_free(head);
 				free(strinput);
 				exit(EXIT_FAILURE);
-				}*/
-		}
+				}
+		}*/
 		
 
 
 
-		/*if (token_1 != NULL)
+		if (token_1 != NULL)
 		{
 			tokennum = _atoi(token_1);
 			if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
@@ -141,7 +141,7 @@ void read_file(const char *file_name)
                                 free(strinput);
                                 exit(EXIT_FAILURE);
 			}
-			}*/
+			}
 
 		p = getopcode(token_0);
 		if (p == NULL)
