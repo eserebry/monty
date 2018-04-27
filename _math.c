@@ -10,7 +10,7 @@ void _add(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	tmp = *head;
-	if ((*head)->next == NULL)
+	if ((*head) == NULL || (*head)->next == NULL)
 	{
 		printf("L%d: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
@@ -34,7 +34,7 @@ void _sub(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	tmp = *head;
-	if ((*head)->next == NULL)
+	if ((*head) == NULL || (*head)->next == NULL)
 	{
 		printf("L%d: can't sub, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
@@ -60,7 +60,7 @@ void _div(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	tmp = *head;
-	if ((*head)->next == NULL)
+	if ((*head) == NULL || (*head)->next == NULL)
 	{
 		printf("L%d: can't div, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
@@ -85,7 +85,7 @@ void _mul(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	tmp = *head;
-	if ((*head)->next == NULL)
+	if ((*head = NULL) || (*head)->next == NULL)
 	{
 		printf("L%d: can't mul, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
