@@ -48,6 +48,6 @@ void _div(stack_t **head, unsigned int line_num);
 void _mul(stack_t **head, unsigned int line_num);
 void _mod(stack_t **head, unsigned int line_num);
 void _free(stack_t *head);
-int _atoi(char *number);
+int _isdigit(char *str);
 extern char *tokennum;
 #endif

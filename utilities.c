@@ -1,5 +1,27 @@
 #include "monty.h"
 /**
+ *_isdigit - decimal-digit character test
+ *@str: pointer toa string to check
+ *
+ *Return: 1 if it"s an ineteger string, 0 if it's not
+ */
+int _isdigit(char *str)
+{
+	int i = 0;
+
+	if (str[0] == '-')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+/**
  *_atoi - own atoi
  *@number: number to convert
  *
