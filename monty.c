@@ -26,6 +26,7 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 		{"mul", _mul},
 		{"div", _div},
 		{"nop", _nop},
+		{"mod", _mod},
 		{NULL, NULL}
 	};
 	int i = 0;
