@@ -76,11 +76,9 @@ void read_file(const char *file_name)
 	{
 		line_num++;
 		token_0 = strtok(strinput, delim);
-		if (strncmp(token_0, "#", 1) == 0)
-			continue;
 		token_1 = strtok(NULL, delim);
 		tokennum = token_1;
-		if (!token_0 || !strinput)
+		if (!token_0 || !strinput || token_0[0] == '#')
 			continue;
 		p = getopcode(token_0);
 		if (p == NULL)
