@@ -56,7 +56,7 @@ void _sub(stack_t **head, unsigned int line_num)
  */
 void _div(stack_t **head, unsigned int line_num)
 {
-	unsigned int sub = 0;
+	unsigned int div = 0;
 	stack_t *tmp;
 
 	if ((*head) == NULL || (*head)->next == NULL)
@@ -64,9 +64,14 @@ void _div(stack_t **head, unsigned int line_num)
 		printf("L%d: can't div, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
+	if ((*head)->n == 0)
+	{
+		printf("L%d: division by zero\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	tmp = *head;
-	sub = (*head)->next->n / (*head)->n;
-	(*head)->next->n = sub;
+	div = (*head)->next->n / (*head)->n;
+	(*head)->next->n = div;
 
 	*head = (*head)->next;
 	(*head)->prev = NULL;
@@ -81,7 +86,7 @@ void _div(stack_t **head, unsigned int line_num)
  */
 void _mul(stack_t **head, unsigned int line_num)
 {
-	unsigned int sub = 0;
+	unsigned int mul = 0;
 	stack_t *tmp;
 
 	if ((*head == NULL) || (*head)->next == NULL)
@@ -90,8 +95,8 @@ void _mul(stack_t **head, unsigned int line_num)
 		exit(EXIT_FAILURE);
 	}
 	tmp = *head;
-	sub = (*head)->next->n * (*head)->n;
-	(*head)->next->n = sub;
+	mul = (*head)->next->n * (*head)->n;
+	(*head)->next->n = mul;
 
 	*head = (*head)->next;
 	(*head)->prev = NULL;
