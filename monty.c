@@ -102,7 +102,7 @@ void read_file(const char *file_name)
 		if (p == NULL)
 		{
 			printf("L%d: unknown instruction %s\n",
-			       tokennum, token_1);
+			       tokennum, token_0);
 			_free(head);
 			free(strinput);
 			exit(EXIT_FAILURE);
