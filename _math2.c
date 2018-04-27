@@ -13,13 +13,11 @@ void _mod(stack_t **head, unsigned int line_num)
 	if ((*head) == NULL || (*head)->next == NULL)
 	{
 		printf("L%d: can't mod, stack too short\n", line_num);
-		free(head);
 		exit(EXIT_FAILURE);
 	}
 	if ((*head)->n == 0)
 	{
 		printf("L%d: division by zero\n", line_num);
-		free(head);
 		exit(EXIT_FAILURE);
 	}
 	tmp = *head;
