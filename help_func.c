@@ -1,5 +1,23 @@
 #include "monty.h"
 
+int _isdigit(char *str)
+{
+        int i = 0;
+
+	if (str[0] == '-')
+		i++;
+        while (str[i] != '\0')
+        {
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
+			return (0);
+        }
+        return (1);
+
+}
+
+
 /**
  * _swap - swaps the top two elements in stack
  *@head: pointer to the doubly linked list
@@ -110,6 +128,30 @@ void _pall(stack_t **head, unsigned int i __attribute__ ((unused)))
 void _push(stack_t **head, unsigned int line_num __attribute__ ((unused)))
 {
 	stack_t *new;
+	
+	if (tokennum == NULL)
+	{
+		printf("L%d: usage: push integer\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	
+	if (_isdigit(tokennum) == 0)
+	{
+		printf("L%d: usage: push integer\n", line_num);
+		exit(EXIT_FAILURE);;
+	}
+	
+	if (tokennum[0] == '-' && tokennum[1] == '0')
+	{
+		tokennum++;
+	}
+
+	if (atoi(tokennum) == 0 && strcmp(tokennum, "0") != 0)
+	{
+		printf("L%d: usage: push integer\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
@@ -118,7 +160,7 @@ void _push(stack_t **head, unsigned int line_num __attribute__ ((unused)))
 		_free(*head);
 		exit(EXIT_FAILURE);
 	}
-	new->n = tokennum;
+	new->n = atoi(tokennum);
 	new->next = *head;
 	new->prev = NULL;
 	if (*head != NULL)

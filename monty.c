@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-int tokennum = 0;
+char *tokennum = NULL;
 /**
  * getopcode - function that selects the correct function
  * to perform the operation asked by the user
@@ -41,19 +41,29 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 	}
 	return (NULL);
 }
-int _isdigit(char *str)
+/*int _isdigit(char *str)
 {
 	int i = 0;
 
 	while (str[i] != '\0')
 	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[0] == '-')
+		if (str[0] == '-')
+		{
+			printf("I found minus!\n");
 			i++;
+		}
+		if (str[i] >= '0' && str[i] <= '9')
+		{
+			if (str[1] == '0')
+				printf("I found nol'!\n");
+			i++;
+		}
+
 		else 
 			return (0);
 	}
 	return (1);
-}
+	}*/
 /**
  *read_file - reads a text file (and prints it to a standart output)
  *
@@ -86,31 +96,35 @@ void read_file(const char *file_name)
 	while ((readcount = getline(&strinput, &len, fd)) != -1)
 	{
 		line_num++;
-
 		token_0 = strtok(strinput, delim);
 		token_1 = strtok(NULL, delim);
+		tokennum = token_1;
 		if (!token_0 || !strinput)
 			continue;
-		if ((strcmp(token_0, "push") == 0 && token_1 == NULL) || 
-		    ((strcmp(token_0, "push") == 0) && _isdigit(token_1) == 0))
+		/*if ((strcmp(token_0, "push") == 0)
 		{
-			printf("L%d: usage: push integer\n", line_num);
+			printf("L%d: usage: push integer pls\n", line_num);
 			_free(head);
 			free(strinput);
 			exit(EXIT_FAILURE);
-		}
+			}*/
+/*
 		if (token_1 != NULL)
 		{
-			tokennum = atoi(token_1);
+			if (token_1[0] == '-')
+				tokennum = atoi(token_1) * -1;
+			else
+				tokennum = atoi(token_1); 
+			printf("%d\n", tokennum);
 			if ((strcmp(token_0, "push") == 0 && tokennum == 0 && (strcmp(token_1, "0") != 0)))
 			{
-                                printf("L%d: usage: push integer\n", line_num);
+                                printf("L%d: usage: push integer pls\n", line_num);
                                 _free(head);
                                 free(strinput);
                                 exit(EXIT_FAILURE);
 			}
 		}
-
+*/
 		p = getopcode(token_0);
 		if (p == NULL)
 		{
