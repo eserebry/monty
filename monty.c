@@ -127,13 +127,13 @@ void read_file(const char *file_name)
 		if (token_1 != NULL)
 		{
 			tokennum = _atoi(token_1);
-			if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
+			/*if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
 			{
 				printf("L%d: usage: push integer\n", line_num);
 				_free(head);
 				free(strinput);
 				exit(EXIT_FAILURE);
-				}
+				}*/
 			if ((tokennum == 0 && (strcmp(token_1, "0") != 0)))
 			{
                                 printf("L%d: usage: push integer\n", line_num);
