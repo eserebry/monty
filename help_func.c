@@ -10,10 +10,10 @@ void _swap(stack_t **head, unsigned int line_num)
 	stack_t *tmp;
 
 	if (head == NULL || *head == NULL)
-        {
-                printf("L%d: can't swap an empty stack\n", line_num);
-                exit(EXIT_FAILURE);
-        }
+	{
+		printf("L%d: can't swap an empty stack\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	if ((*head)->next == NULL)
 	{
 		printf("L%d: can't swap, stack too short\n", line_num);
