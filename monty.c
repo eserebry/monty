@@ -41,7 +41,19 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 	}
 	return (NULL);
 }
+int _isdigit(char *str)
+{
+	int i = 0;
 
+	while (str[i] != '\0')
+	{
+		if ((str[i] >= '0' && str[i] <= '9') || str[0] == '-')
+			i++;
+		else 
+			return (0);
+	}
+	return (1);
+}
 /**
  *read_file - reads a text file (and prints it to a standart output)
  *
@@ -86,7 +98,33 @@ void read_file(const char *file_name)
 			free(strinput);
 			exit(EXIT_FAILURE);
 		}
-		if (token_1 != NULL)
+
+		if (strcmp(token_0, "push") == 0 && token_1 != NULL)
+		{
+			printf("its push and second value is not empty\n");
+			if (_isdigit(token_1) == 1)
+				tokennum = atoi(token_1);
+			else if (_isdigit(token_1) == 0)
+			{
+				printf("i am here\n");
+                                printf("L%d: usage: push integer\n", line_num);
+                                _free(head);
+                                free(strinput);
+                                exit(EXIT_FAILURE);
+                        }
+			/*if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
+			{
+				printf("L%d: usage: push integer\n", line_num);
+				_free(head);
+				free(strinput);
+				exit(EXIT_FAILURE);
+				}*/
+		}
+		
+
+
+
+		/*if (token_1 != NULL)
 		{
 			tokennum = _atoi(token_1);
 			if ((tokennum == 0 && (strcmp(token_1, "-0") != 0)))
@@ -95,15 +133,15 @@ void read_file(const char *file_name)
 				_free(head);
 				free(strinput);
 				exit(EXIT_FAILURE);
-			}
-			/*if ((tokennum == 0 && (strcmp(token_1, "0") != 0)))
+				}
+			if ((tokennum == 0 && (strcmp(token_1, "0") != 0)))
 			{
                                 printf("L%d: usage: push integer\n", line_num);
                                 _free(head);
                                 free(strinput);
                                 exit(EXIT_FAILURE);
-				}*/
-		}
+			}
+			}*/
 
 		p = getopcode(token_0);
 		if (p == NULL)
