@@ -40,7 +40,18 @@ void (*getopcode(char *s))(stack_t **, unsigned int)
 	}
 	return (NULL);
 }
+int is_digit(char *str)
+{
+	int i = 0;
 
+	while(str[i] != '\0')
+	{
+		if ((str[i] > '0' && str[i] < '9'))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  *read_file - reads a text file (and prints it to a standart output)
@@ -79,8 +90,6 @@ void read_file(const char *file_name)
 		token_1 = strtok(NULL, delim);
 		if (!token_0 || !strinput)
 			continue;
-
-
 		if ((strcmp(token_0, "push") == 0) && token_1 == NULL)
 		{
 			printf("L%d: usage: push integer\n", line_num);
@@ -90,6 +99,18 @@ void read_file(const char *file_name)
 		}
 		if (token_1 != NULL)
 		{
+			if (is_digit(token_1) == 1 )
+				tokennum = atoi(token_1);
+			else if (is_digit(token_1) == 0)
+			{
+				printf("L%d: usage: push integer\n", line_num);
+                                _free(head);
+                                free(strinput);
+                                exit(EXIT_FAILURE);
+			}
+		}
+		/*if (token_1 != NULL)
+		{
 			tokennum = _atoi(token_1);
 			if (tokennum == 0 && (strcmp(token_1, "0") != 0))
 			{
@@ -98,7 +119,7 @@ void read_file(const char *file_name)
 				free(strinput);
 				exit(EXIT_FAILURE);
 			}
-		}
+			}*/
 
 		p = getopcode(token_0);
 		if (p == NULL)
