@@ -66,9 +66,14 @@ void _pstr(stack_t **head, unsigned int i __attribute__ ((unused)))
 		printf("\n");
 		return;
 	}
-	while ((*head) != NULL && (isascii((*head)->n) != 0)
-	       && (*head)->n != 0)
+	while ((*head) != NULL)
 	{
+		if ((isascii((*head)->n) == 0)
+		    || (*head)->n == 0)
+		{
+			printf("\n");
+			return;
+		}
 		printf("%c", (*head)->n);
 		*head = (*head)->next;
 	}
