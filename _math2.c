@@ -41,10 +41,14 @@ void _pchar(stack_t **head, unsigned int line_num)
 	if (head == NULL || *head == NULL)
 	{
 		printf("L%d: can't pint, stack empty\n", line_num);
-		_free(*head);
 		exit(EXIT_FAILURE);
 	}
 	if (((*head)->n >= 65 && (*head)->n <= 90)
 	    || ((*head)->n >= 97 && (*head)->n <= 122))
 		printf("%c\n", (*head)->n);
+	else
+	{
+		printf("L%d: can't pchar, value out of range\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 }
