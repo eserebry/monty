@@ -43,8 +43,7 @@ void _pchar(stack_t **head, unsigned int line_num)
 		printf("L%d: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-	if (((*head)->n >= 65 && (*head)->n <= 90)
-	    || ((*head)->n >= 97 && (*head)->n <= 122))
+	if (isascii((*head)->n) != 0)
 		printf("%c\n", (*head)->n);
 	else
 	{
