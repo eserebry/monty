@@ -61,21 +61,25 @@ void _pchar(stack_t **head, unsigned int line_num)
  */
 void _pstr(stack_t **head, unsigned int i __attribute__ ((unused)))
 {
+	stack_t *tmp;
+
 	if (head == NULL || *head == NULL)
 	{
 		printf("\n");
 		return;
 	}
-	while ((*head) != NULL)
+	tmp = *head;
+	while (tmp != NULL)
 	{
-		if ((isascii((*head)->n) == 0)
-		    || (*head)->n == 0)
+		if ((isascii(tmp->n) == 0)
+		    || tmp->n == 0)
 		{
 			printf("\n");
 			return;
 		}
-		printf("%c", (*head)->n);
-		*head = (*head)->next;
+		printf("%c", tmp->n);
+		tmp = tmp->next;
 	}
 	printf("\n");
+	free(head);
 }
