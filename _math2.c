@@ -29,3 +29,20 @@ void _mod(stack_t **head, unsigned int line_num)
 
 	free(tmp);
 }
+
+/**
+ * _pchar - prints the char at the top of the stack, followed by a new line.
+ *
+ *@head: pointer to the head of the linked list
+ *@line_num: line number
+ */
+void _pchar(stack_t **head, unsigned int line_num)
+{
+	if (head == NULL || *head == NULL)
+	{
+		printf("L%d: can't pint, stack empty\n", line_num);
+		_free(*head);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", (*head)->n);
+}
