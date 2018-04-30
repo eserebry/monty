@@ -44,5 +44,7 @@ void _pchar(stack_t **head, unsigned int line_num)
 		_free(*head);
 		exit(EXIT_FAILURE);
 	}
-	printf("%c\n", (*head)->n);
+	if (((*head)->n >= 65 && (*head)->n <= 90)
+	    || ((*head)->n >= 97 && (*head)->n <= 122))
+		printf("%c\n", (*head)->n);
 }
