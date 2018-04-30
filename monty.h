@@ -50,5 +50,6 @@ void _mod(stack_t **head, unsigned int line_num);
 void _free(stack_t *head);
 int _isdigit(char *str);
 void _pchar(stack_t **head, unsigned int line_num);
+void _pstr(stack_t **head, unsigned int i __attribute__ ((unused)));
 extern char *tokennum;
 #endif
