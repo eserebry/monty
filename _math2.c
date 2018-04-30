@@ -40,7 +40,7 @@ void _pchar(stack_t **head, unsigned int line_num)
 {
 	if (head == NULL || *head == NULL)
 	{
-		printf("L%d: can't pint, stack empty\n", line_num);
+		printf("L%d: can't pchar, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 	if (isascii((*head)->n) != 0)
